@@ -37,6 +37,7 @@ public class CartFragment extends Fragment  {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FakeCart();
 
     }
 
@@ -46,7 +47,6 @@ public class CartFragment extends Fragment  {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         lsBook = new ArrayList<>();
-        FakeCart();
         cartAdapter = new CartAdapter(lsBook, this);
         final RecyclerView cartRecycle = view.findViewById(R.id.CartBook);
         cartRecycle.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayout.VERTICAL, false));

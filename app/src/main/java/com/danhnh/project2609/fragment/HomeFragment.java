@@ -1,8 +1,10 @@
 package com.danhnh.project2609.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -31,7 +33,7 @@ import java.util.Date;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements FragmentManager.OnBackStackChangedListener {
+public class HomeFragment extends Fragment {
     private ArrayList<SectionBook> allOfBook;
     private ArrayList<Advertisement> allAds;
     private AdsImageAdapter adsImageAdapter;
@@ -71,29 +73,7 @@ public class HomeFragment extends Fragment implements FragmentManager.OnBackStac
 //            }
 //        });
 
-        Thread thread = new Thread(new Runnable() {
 
-            @Override
-            public void run() {
-                int nextView = 0;
-                int countItem = adsImageAdapter.getItemCount();
-                while (true) {
-                    try {
-                        if (nextView < countItem - 1) {
-                            nextView++;
-                        } else {
-                            nextView = 0;
-                        }
-                        Thread.sleep(10000);
-                        adsSlider.smoothScrollToPosition(nextView);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        });
-        thread.start();
 
         return v;
     }
@@ -168,10 +148,7 @@ public class HomeFragment extends Fragment implements FragmentManager.OnBackStac
 
 
     @Override
-    public void onBackStackChanged() {
-        if (getActivity().getSupportFragmentManager().getBackStackEntryCount() <= 1) {
-//            ((MainActivity)getActivity()).hideUpButton();
-
-        }
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
     }
 }
