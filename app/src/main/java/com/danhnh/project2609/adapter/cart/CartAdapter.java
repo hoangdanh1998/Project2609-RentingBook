@@ -1,7 +1,6 @@
 package com.danhnh.project2609.adapter.cart;
 
-import android.app.Dialog;
-import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -10,22 +9,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.danhnh.project2609.R;
-import com.danhnh.project2609.model.Book;
+import com.danhnh.project2609.model.book.Book;
+import com.danhnh.project2609.model.book.BookRenting;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ItemHolder> {
-    private ArrayList<Book> listBookInCart;
+    private ArrayList<BookRenting> listBookInCart;
     private Fragment fragment;
 
-    public CartAdapter(ArrayList<Book> listBookInCart, Fragment fragment) {
+    public CartAdapter(ArrayList<BookRenting> listBookInCart, Fragment fragment) {
         this.listBookInCart = listBookInCart;
         this.fragment = fragment;
     }
@@ -40,11 +42,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ItemHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
-        Book myBook = listBookInCart.get(position);
-        holder.txtTitle.setText(myBook.getTitle());
-        holder.txtPrice.setText(myBook.getPrice() + " đ");
+        BookRenting myBookRenting = listBookInCart.get(position);
+        holder.txtTitle.setText(myBookRenting.getBook().getTitle());
+        holder.txtPrice.setText(myBookRenting.getPrice() + " đ");
         holder.txtQuantity.setText(1 + "");
-        holder.imgBook.setImageResource(myBook.getImage());
+        try {
+            holder.imgBook.setImageDrawable(Drawable.createFromStream(
+                    (InputStream) new URL(myBookRenting.getImageURLs().get(0)).getContent(), null));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

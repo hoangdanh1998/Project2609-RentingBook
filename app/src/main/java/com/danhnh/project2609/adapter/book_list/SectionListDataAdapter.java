@@ -1,29 +1,34 @@
 package com.danhnh.project2609.adapter.book_list;
 
-import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.danhnh.project2609.model.Book;
-import com.danhnh.project2609.R;
 
+import com.danhnh.project2609.R;
+import com.danhnh.project2609.fragment.DetailFragment;
+import com.danhnh.project2609.model.book.BookRenting;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListDataAdapter.BookHolder> {
-    private ArrayList<Book> BooksList;
-    private Context mContext;
+    private ArrayList<BookRenting> BooksList;
+    private Fragment fragment;
 
-    public SectionListDataAdapter(Context mContext, ArrayList<Book> BooksList) {
+    public SectionListDataAdapter(Fragment fragment, ArrayList<BookRenting> BooksList) {
         this.BooksList = BooksList;
-        this.mContext = mContext;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -36,9 +41,15 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
 
     @Override
     public void onBindViewHolder(@NonNull BookHolder bookHolder, int position) {
-        Book itemBook = BooksList.get(position);
-        bookHolder.tvTitle.setText(itemBook.getTitle());
-        bookHolder.itemImage.setImageResource(itemBook.getImage());
+
+        BookRenting itemBook = BooksList.get(position);
+        bookHolder.tvTitle.setText(itemBook.getBook().getTitle());
+        System.out.println("Src: "+itemBook.getImageURLs().get(0));
+        try {
+            bookHolder.itemImage.setImageDrawable(Drawable.createFromStream((InputStream) new URL(itemBook.getImageURLs().get(0)).getContent(), null));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         bookHolder.txtPrice.setText(itemBook.getPrice()+" VND");
 
     }
@@ -65,17 +76,28 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
             itemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), tvTitle.getText() , Toast.LENGTH_SHORT).show();
-
-
+                    Fragment fragmentDetail = new DetailFragment();
+                    fragment.getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fgmHome,fragmentDetail)
+                            .addToBackStack(null)
+                            .commit();
                 }
             });
             btnShowDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), tvTitle.getText() , Toast.LENGTH_SHORT).show();
+                    Fragment fragmentDetail = new DetailFragment();
+                    fragment.getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fgmHome,fragmentDetail)
+                            .addToBackStack(null)
+                            .commit();
                 }
             });
+
         }
     }
 }

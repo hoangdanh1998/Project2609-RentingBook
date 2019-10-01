@@ -1,4 +1,4 @@
-package com.danhnh.project2609;
+package com.danhnh.project2609.fragment;
 
 
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.danhnh.project2609.R;
 
 
 /**

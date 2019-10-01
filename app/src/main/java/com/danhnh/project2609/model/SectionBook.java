@@ -1,12 +1,15 @@
 package com.danhnh.project2609.model;
 
+import com.danhnh.project2609.model.book.Book;
+import com.danhnh.project2609.model.book.BookRenting;
+
 import java.util.ArrayList;
 
 public class SectionBook {
     private String title;
-    private ArrayList<Book> BooksOfTitle;
+    private ArrayList<BookRenting> BooksOfTitle;
 
-    public SectionBook(String title, ArrayList<Book> booksOfTitle) {
+    public SectionBook(String title, ArrayList<BookRenting> booksOfTitle) {
         this.title = title;
         BooksOfTitle = booksOfTitle;
     }
@@ -19,11 +22,11 @@ public class SectionBook {
         this.title = title;
     }
 
-    public ArrayList<Book> getBooksOfTitle() {
+    public ArrayList<BookRenting> getBooksOfTitle() {
         return BooksOfTitle;
     }
 
-    public void setBooksOfTitle(ArrayList<Book> booksOfTitle) {
+    public void setBooksOfTitle(ArrayList<BookRenting> booksOfTitle) {
         BooksOfTitle = booksOfTitle;
     }
 }

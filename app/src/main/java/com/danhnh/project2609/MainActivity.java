@@ -4,20 +4,23 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.danhnh.project2609.adapter.main.MainBarAdapter;
+import com.danhnh.project2609.fragment.CartFragment;
+import com.danhnh.project2609.fragment.HomeFragment;
+import com.danhnh.project2609.fragment.NotificationFragment;
+import com.danhnh.project2609.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 
+import android.os.StrictMode;
 import android.util.AttributeSet;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
@@ -33,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.ThreadPolicy policy = new
+                StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 //        requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
 //        getSupportActionBar().hide(); // hide the title bar
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

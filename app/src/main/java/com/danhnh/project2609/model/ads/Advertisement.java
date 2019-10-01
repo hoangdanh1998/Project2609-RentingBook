@@ -1,4 +1,4 @@
-package com.danhnh.project2609.model;
+package com.danhnh.project2609.model.ads;
 public class Advertisement{
     int image;
     String name;

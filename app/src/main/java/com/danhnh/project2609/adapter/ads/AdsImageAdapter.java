@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.danhnh.project2609.R;
-import com.danhnh.project2609.model.Advertisement;
+import com.danhnh.project2609.model.ads.Advertisement;
 
 import java.util.ArrayList;
 

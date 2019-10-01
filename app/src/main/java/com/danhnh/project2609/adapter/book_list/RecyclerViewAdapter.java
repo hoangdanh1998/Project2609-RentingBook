@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,11 +21,11 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ItemRowHolder> {
 
     private ArrayList<SectionBook> dataList;
-    private Context mContext;
+    private Fragment fragment;
 
-    public RecyclerViewAdapter(Context context, ArrayList<SectionBook> dataList) {
+    public RecyclerViewAdapter(Fragment fragment, ArrayList<SectionBook> dataList) {
         this.dataList = dataList;
-        this.mContext = context;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -42,10 +43,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         itemRowHolder.title.setText(sectionName);
 
-        SectionListDataAdapter itemListDataAdapter = new SectionListDataAdapter(mContext, singleSectionItems);
+        SectionListDataAdapter itemListDataAdapter = new SectionListDataAdapter(fragment, singleSectionItems);
 
         itemRowHolder.recycler_view_list.setHasFixedSize(true);
-        itemRowHolder.recycler_view_list.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+        itemRowHolder.recycler_view_list.setLayoutManager(new LinearLayoutManager(fragment.getContext(), LinearLayoutManager.HORIZONTAL, false));
         itemRowHolder.recycler_view_list.setAdapter(itemListDataAdapter);
 
         itemRowHolder.btnMore.setOnClickListener(new View.OnClickListener() {
